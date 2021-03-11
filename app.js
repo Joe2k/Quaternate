@@ -2,8 +2,10 @@ const express = require("express");
 
 const app = express();
 
+app.set("view engine", "ejs");
+
 app.get("/", function (req, res) {
-  res.send("Hi");
+  res.render("home");
 });
 
 let PORT = process.env.PORT || 4000;
