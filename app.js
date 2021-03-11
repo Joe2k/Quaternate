@@ -3,8 +3,8 @@ const bodyParser = require("body-parser");
 const session = require("express-session");
 const passport = require("passport");
 const cors = require("cors");
-const server = require("http").Server(app);
-const io = require("socket.io")(server);
+//const server = require("http").Server(app);
+//const io = require("socket.io")(server);
 
 const connectDB = require("./config/db");
 const authRoutes = require("./routes/auth");
