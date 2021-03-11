@@ -35,8 +35,11 @@ passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-app.get("/", function (req, res) {
-  res.render("home");
+app.get("/home", function (req, res) {
+  if (req.isAuthenticated()) {
+    const newname = req.user.name;
+    res.render("home", { newname: newname });
+  } else res.render("home", { newname: "" });
 });
 
 app.use("/auth", authRoutes);
