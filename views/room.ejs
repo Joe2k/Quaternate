@@ -29,6 +29,7 @@
           <tr>
                     <td class="text-center"><%=user.rooms[i].roomName%></td>
                     <td><form action="/room/cubicle/<%=user.rooms[i]._id%>" method="GET"><button class="btn btn-primary" type="submit">Open room</button></form></td>
+                    <td><form action="/chat/<%=user.rooms[i]._id%>" method="GET"><button class="btn btn-primary" type="submit">Open chat</button></form></td>
             </tr>
           <%}%>
     </div>
