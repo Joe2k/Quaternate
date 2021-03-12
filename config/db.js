@@ -1,6 +1,9 @@
 require("dotenv").config();
 const mongoose = require("mongoose");
+mongoose.Promise  = require("bluebird");
 
+// const  url  =  "mongodb://localhost:4000/chat";
+// const  connect  =  mongoose.connect(url, { useNewUrlParser: true  });
 const connectDB = () => {
   mongoose
     .connect(
