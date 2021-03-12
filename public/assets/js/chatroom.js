@@ -64,12 +64,13 @@
     .then((json) => {
       json.map((data) => {
         console.log(data);
-        let li = document.createElement("li");
+        // let li = document.createElement("li");
         let messages = document.getElementById("message-list");
         let span = document.createElement("span");
-        messages.appendChild(li).append(data.message);
+        messages.appendChild(span).append(data.sender.name + ": : " + data.message);
+        // messages.appendChild(li).append(data.message);
 
-        messages.appendChild(span).append("by " + data.sender.name);
+        
       });
     });
 })();
