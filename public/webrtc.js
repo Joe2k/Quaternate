@@ -62,7 +62,7 @@ function start() {
       .then(() => {
         console.log("ws://" + window.location.hostname + ":" + WS_PORT);
         serverConnection = new WebSocket(
-          "ws://" + window.location.hostname + ":" + 4050
+          "wss://" + "quaternate-wss.herokuapp.com"
         );
         serverConnection.onmessage = gotMessageFromServer;
         serverConnection.onopen = (event) => {
