@@ -23,6 +23,7 @@ const roomRoutes = require("./routes/room");
 const errorHandler = require("./controllers/error");
 
 const app = express();
+const app2 = express();
 const chatRoutes = require("./routes/chat");
 
 app.use(bodyParser.json());
@@ -73,6 +74,18 @@ app.get("/chat/:id", async function (req, res) {
     res.redirect("/home");
   }
 });
+app.get("/duo/:id", async function (req, res) {
+  if (req.isAuthenticated()) {
+    const userName = req.user.name;
+    const userId = req.user._id;
+    const roomId = req.params.id;
+    const room = await Room.findById(roomId);
+    const user = await User.findById(req.user._id);
+    res.render("duo", { userName, roomId, room, userId, user });
+  } else {
+    res.redirect("/home");
+  }
+});
 
 app.get("/cubicle", function (req, res) {
   res.render("cubicle");
@@ -80,6 +93,8 @@ app.get("/cubicle", function (req, res) {
 
 app.use("/auth", authRoutes);
 app.use("/room", roomRoutes);
+
+app.get("/", (req, res) => res.redirect("/home"));
 
 app.use(function (req, res, next) {
   let err = new Error("Not Found");
@@ -100,39 +115,41 @@ function heartbeat() {
   this.isAlive = true;
 }
 
-// const wss = new WebSocketServer({ server: server });
+const server2 = app2.listen(4050, () => {
+  console.log("wss running on 4050");
+});
 
-// wss.on("connection", function (ws) {
-//   ws.isAlive = true;
-//   ws.on("pong", heartbeat);
-//   ws.on("message", function (message) {
-//     // Broadcast any received message to all clients
-//     console.log("received: %s", message);
-//     wss.broadcast(message);
-//   });
+const wss = new WebSocketServer({ server: server2 });
 
-//   ws.on("error", () => ws.terminate());
-// });
-// const interval = setInterval(function ping() {
-//   wss.clients.forEach(function each(ws) {
-//     if (ws.isAlive === false) return ws.terminate();
+wss.on("connection", function (ws) {
+  ws.isAlive = true;
+  ws.on("pong", heartbeat);
+  ws.on("message", function (message) {
+    // Broadcast any received message to all clients
+    console.log("received: %s", message);
+    wss.broadcast(message);
+  });
 
-//     ws.isAlive = false;
-//     ws.ping(noop);
-//   });
-// }, 30000);
+  ws.on("error", () => ws.terminate());
+});
+const interval = setInterval(function ping() {
+  wss.clients.forEach(function each(ws) {
+    if (ws.isAlive === false) return ws.terminate();
 
-// wss.broadcast = function (data) {
-//   console.log(this.clients.size);
-//   this.clients.forEach(function (client) {
-//     console.log("hi");
-//     if (client.readyState === WebSocket.OPEN) {
-//       client.send(data);
-//     }
-//   });
-// };
+    ws.isAlive = false;
+    ws.ping(noop);
+  });
+}, 30000);
 
-// console.log("Server running.");
+wss.broadcast = function (data) {
+  console.log(this.clients.size);
+  this.clients.forEach(function (client) {
+    console.log("hi");
+    if (client.readyState === WebSocket.OPEN) {
+      client.send(data);
+    }
+  });
+};
 
 // httpServer = http.createServer();
 // httpServer.listen(4050, () => {

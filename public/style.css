@@ -13,15 +13,17 @@ body {
   grid-auto-flow: row;
   padding-bottom: 0px;
 
-  grid-template-columns: repeat(auto-fit, minmax(var(--colWidth), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(50vw, 1fr));
 }
 
 .videoContainer {
   position: relative;
   overflow: hidden;
+  width: 40%;
 
-  min-height: var(--rowHeight);
-  min-width: var(--colWidth);
+  min-height: 50vh;
+  min-width: 1vw;
+  max-width: 30vw;
 }
 
 .videoContainer video {

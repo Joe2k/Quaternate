@@ -59,8 +59,10 @@ function start() {
 
       // set up websocket and message all existing clients
       .then(() => {
-        console.log("wss://" + window.location.hostname + ":" + WS_PORT);
-        serverConnection = new WebSocket("wss://" + window.location.hostname);
+        console.log("ws://" + window.location.hostname + ":" + WS_PORT);
+        serverConnection = new WebSocket(
+          "ws://" + window.location.hostname + ":" + 4050
+        );
         serverConnection.onmessage = gotMessageFromServer;
         serverConnection.onopen = (event) => {
           serverConnection.send(
@@ -71,10 +73,10 @@ function start() {
             })
           );
         };
-        serverConnection.on("ping", heartbeat);
-        client.on("close", function clear() {
+        serverConnection.onping = () => heartbeat;
+        serverConnection.onclose = function clear() {
           clearTimeout(this.pingTimeout);
-        });
+        };
       })
       .catch(errorHandler);
   } else {
