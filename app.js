@@ -22,6 +22,7 @@ const authRoutes = require("./routes/auth");
 const roomRoutes = require("./routes/room");
 const errorHandler = require("./controllers/error");
 
+// h
 const app = express();
 // const app2 = express();
 const chatRoutes = require("./routes/chat");
