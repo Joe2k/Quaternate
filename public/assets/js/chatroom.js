@@ -1,5 +1,5 @@
 (function connect() {
-  let socket = io.connect("http://localhost:4000");
+  let socket = io.connect("https://quaternate.herokuapp.com");
 
   let username = document.querySelector("#username");
   let usernameBtn = document.querySelector("#usernameBtn");
@@ -67,10 +67,10 @@
         // let li = document.createElement("li");
         let messages = document.getElementById("message-list");
         let span = document.createElement("span");
-        messages.appendChild(span).append(data.sender.name + ": : " + data.message);
+        messages
+          .appendChild(span)
+          .append(data.sender.name + ": : " + data.message);
         // messages.appendChild(li).append(data.message);
-
-        
       });
     });
 })();

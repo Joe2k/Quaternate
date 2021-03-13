@@ -253,7 +253,7 @@ function checkPeerDisconnect(event, peerUuid) {
 
 function startCall() {
   document.getElementById("startCall").style.display = "none";
-  document.getElementById("videos").style.display = "block";
+  document.getElementById("videos").style.display = "flex";
   document.getElementById("footer1").style.display = "block";
   start();
 }
