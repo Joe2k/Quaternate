@@ -13,26 +13,70 @@
     />
     <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css" />
   </head>
-  <body>
-    <div class="container">
-      <form method="POST" action="/room/create">
-        <input name="roomName" placeholder="Type new room name" />
-        <input name="password" placeholder="Type new password" />
-        <button type="submit" class="btn btn-primary">Create new room</button>
-      </form>
-      <form method="POST" action="/room/join">
-        <input name="roomName" placeholder="Type joining room name" />
-        <input name="password" placeholder="Type the password" />
-        <button type="submit" class="btn btn-primary">Join this room</button>
-      </form>
-      <%for(var i=0;i<user.rooms.length;i++){%>
-          <tr>
-                    <td class="text-center"><%=user.rooms[i].roomName%></td>
-                    <td><form action="/room/cubicle/<%=user.rooms[i]._id%>" method="GET"><button class="btn btn-primary" type="submit">Open room</button></form></td>
-                    <td><form action="/chat/<%=user.rooms[i]._id%>" method="GET"><button class="btn btn-primary" type="submit">Open chat</button></form></td>
-            </tr>
-          <%}%>
+  <body >
+    <header
+      class="d-flex masthead"
+      style="background: url('/assets/img/4019.jpg'); background-repeat: no-repeat;
+      background-size: 95%; "
+
+    >
+      <!-- <div class="container text-center my-auto" style="padding: 15px30px">
+        <h1 class="mb-1" style="color: var(--white)">Your Rooms</h1>
+        
+        <div class="overlay"></div>
+      </div> -->
+
+
+    <div class="container"  >     
+      <div class="row">
+        <div class="col">
+          <p>
+           <button class="btn btn-primary" type="button" data-toggle="collapse"  data-target="#multiCollapseExample1" aria-expanded="false" aria-controls="multiCollapseExample1">Create A New Room</button>
+          </p>
+          <div class="collapse multi-collapse" id="multiCollapseExample1">
+            <div class="card card-body" style='margin:16px'>
+              <form method="POST" action="/room/create">
+                <input name="roomName" placeholder="Type new room name" />
+                <input name="password" placeholder="Type new password" />
+                <button type="submit" class="btn btn-primary">Create!!</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <p>
+            <button class="btn btn-primary" type="button" data-toggle="collapse"  data-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">Join a Room</button>
+          </p>
+          <div class="collapse multi-collapse" id="multiCollapseExample2">
+            <div class="card card-body" style='margin:16px'>
+              <form method="POST" action="/room/join">
+                <input name="roomName" placeholder="Type joining room name" />
+                <input name="password" placeholder="Type the password" />
+                <button type="submit" class="btn btn-primary">Join!</button>
+              </form> 
+            </div>
+          </div>
+        </div>
+      </div>     
+      
+      <div class="row">
+        <%for(var i=0;i<user.rooms.length;i++){%>      
+          <div class="col-sm-4">
+            <div class="card">
+              <div class="card-body" style="text-align: center">
+                <h5 class="card-title"><%=user.rooms[i].roomName%></h5>
+                <form action="/room/cubicle/<%=user.rooms[i]._id%>" method="GET"><button class="btn btn-primary" style='margin:16px' type="submit">Open room</button></form>
+                <form action="/chat/<%=user.rooms[i]._id%>" method="GET"><button class="btn btn-primary" style='margin:16px' type="submit">Open chat</button></form>
+                <form action="/duo/<%=user.rooms[i]._id%>" method="GET"><button class="btn btn-primary" style='margin:16px' type="submit">Open duo</button></form>
+                <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+              </div>
+            </div>
+          </div>              
+        
+        <%}%>
+      </div>
     </div>
+  </header>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>

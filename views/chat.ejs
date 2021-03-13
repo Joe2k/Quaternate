@@ -2,26 +2,28 @@
 <head>
     <title>Simple realtime chatroom</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
 </head>
 <body>
-    <div class="container">
+    <div style="width: 40%; display: inline;">
         <div class="title">
             <h3><%=room.roomName%></h3>
         </div>
        
-        <div class="card">
-            <div class="card-header"><%=userName%></div>
-            
-            <div class="message-box">
-                <ul class="list-group list-group-flush" id="message-list"></ul>
-                <div class="info"></div>
+        <div class="card" style="background-color: black; color:aquamarine; font-weight: bolder; font-size: larger;">
+            <h3 class="card-header"><%=userName%></h3>
+        </div>
+       
+        <div class="message-box" >   
+            <div class="card" style="background: url('/assets/img/doodle.jpg'); color: aliceblue; font-weight: bold; font-size: large;">
+                <ul class="list-group list-group-flush" id="message-list" style="margin-left: 30px;"></ul>
+                <div class="info" style="background-color:transparent;"></div>
             </div>
             
-            <div class="card-footer">
-                <div class="input-group">
+            <div class="card-footer " style="background-color: black;">
+                <div class="input-group" style="background-color: transparent;">
                     <input type="text" class="form-control" id="message" placeholder="Send new message" >
-                    <div class="input-group-append">
+                    <div class="input-group-append" style="background-color:transparent;">
                         <button class="btn btn-success" type="button" id="messageBtn">Send</button>
                     </div>
                 </div>

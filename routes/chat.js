@@ -9,7 +9,7 @@ router.get("/chat/:roomId", (req, res, next) => {
   Chats.find({})
     .populate("sender")
     .then((chat) => {
-      chat.filter((c) => {
+      chat = chat.filter((c) => {
         return String(c.room.valueOf()) === req.params.roomId;
       });
       console.log(chat);
