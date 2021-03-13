@@ -67,6 +67,7 @@
                 <h5 class="card-title"><%=user.rooms[i].roomName%></h5>
                 <form action="/room/cubicle/<%=user.rooms[i]._id%>" method="GET"><button class="btn btn-primary" style='margin:16px' type="submit">Open room</button></form>
                 <form action="/chat/<%=user.rooms[i]._id%>" method="GET"><button class="btn btn-primary" style='margin:16px' type="submit">Open chat</button></form>
+                <form action="/duo/<%=user.rooms[i]._id%>" method="GET"><button class="btn btn-primary" style='margin:16px' type="submit">Open duo</button></form>
                 <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
               </div>
             </div>

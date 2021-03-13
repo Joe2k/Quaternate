@@ -6,6 +6,7 @@ var localStream;
 var serverConnection;
 var peerConnections = {}; // key is uuid, values are peer connection object and user defined display name string
 var dest;
+var displayed = {};
 
 var peerConnectionConfig = {
   iceServers: [
@@ -86,6 +87,13 @@ function start() {
 function togglemic() {
   localStream.getAudioTracks()[0].enabled = !localStream.getAudioTracks()[0]
     .enabled;
+
+  var background = document.getElementById("mic").style.backgroundColor;
+  if (background == "rgb(0, 0, 0)" || background == "") {
+    document.getElementById("mic").style.background = "rgb(255, 30, 86)";
+  } else {
+    document.getElementById("mic").style.background = "rgb(0,0,0)";
+  }
 }
 
 function togglevideo() {
@@ -111,6 +119,14 @@ function togglevideo() {
   //   }
   localStream.getVideoTracks()[0].enabled = !localStream.getVideoTracks()[0]
     .enabled;
+
+  var background = document.getElementById("video").style.backgroundColor;
+  console.log(background);
+  if (background == "rgb(0, 0, 0)" || background == "") {
+    document.getElementById("video").style.background = "rgb(255, 30, 86)";
+  } else {
+    document.getElementById("video").style.background = "rgb(0,0,0)";
+  }
 }
 
 function gotMessageFromServer(message) {
@@ -158,6 +174,7 @@ function gotMessageFromServer(message) {
 }
 
 function setUpPeer(peerUuid, displayName, initCall = false) {
+  console.log("yee ocnnected");
   peerConnections[peerUuid] = {
     displayName: displayName,
     pc: new RTCPeerConnection(peerConnectionConfig),
@@ -205,20 +222,21 @@ function createdDescription(description, peerUuid) {
 function gotRemoteStream(event, peerUuid) {
   console.log(`got remote stream, peer ${peerUuid}`);
   //assign stream to new HTML video element
-  var vidElement = document.createElement("video");
-  vidElement.setAttribute("autoplay", "");
-  vidElement.setAttribute("muted", "");
-  vidElement.srcObject = event.streams[0];
+  if (displayed[peerUuid] != true) {
+    var vidElement = document.createElement("video");
+    vidElement.setAttribute("autoplay", "");
+    vidElement.setAttribute("muted", "");
+    vidElement.srcObject = event.streams[0];
 
-  var vidContainer = document.createElement("div");
-  vidContainer.setAttribute("id", "remoteVideo_" + peerUuid);
-  vidContainer.setAttribute("class", "videoContainer");
-  vidContainer.appendChild(vidElement);
-  vidContainer.appendChild(makeLabel(peerConnections[peerUuid].displayName));
+    var vidContainer = document.createElement("div");
+    vidContainer.setAttribute("id", "remoteVideo_" + peerUuid);
+    vidContainer.setAttribute("class", "col-6 videoContainer");
+    vidContainer.appendChild(vidElement);
+    vidContainer.appendChild(makeLabel(peerConnections[peerUuid].displayName));
 
-  document.getElementById("videos").appendChild(vidContainer);
-
-  updateLayout();
+    document.getElementById("videos").appendChild(vidContainer);
+    displayed[peerUuid] = true;
+  }
 }
 
 function checkPeerDisconnect(event, peerUuid) {
@@ -229,30 +247,52 @@ function checkPeerDisconnect(event, peerUuid) {
     document
       .getElementById("videos")
       .removeChild(document.getElementById("remoteVideo_" + peerUuid));
-    updateLayout();
+    displayed[peerUuid] = false;
   }
 }
 
-function updateLayout() {
-  // update CSS grid based on number of diplayed videos
-  var rowHeight = "98vh";
-  var colWidth = "98vw";
-
-  var numVideos = Object.keys(peerConnections).length + 1; // add one to include local video
-
-  if (numVideos > 1 && numVideos <= 4) {
-    // 2x2 grid
-    rowHeight = "48vh";
-    colWidth = "48vw";
-  } else if (numVideos > 4) {
-    // 3x3 grid
-    rowHeight = "32vh";
-    colWidth = "32vw";
-  }
-
-  document.documentElement.style.setProperty(`--rowHeight`, rowHeight);
-  document.documentElement.style.setProperty(`--colWidth`, colWidth);
+function startCall() {
+  document.getElementById("startCall").style.display = "none";
+  document.getElementById("videos").style.display = "block";
+  document.getElementById("footer1").style.display = "block";
+  start();
 }
+
+function stopConnection() {
+  for (var peerUuid in peerConnections) {
+    peerConnections[peerUuid].pc.close();
+    document
+      .getElementById("videos")
+      .removeChild(document.getElementById("remoteVideo_" + peerUuid));
+    displayed[peerUuid] = false;
+  }
+  peerConnections = {};
+  document.getElementById("startCall").style.display = "block";
+  document.getElementById("videos").style.display = "none";
+  document.getElementById("footer1").style.display = "none";
+  localStream.getVideoTracks()[0].stop();
+}
+
+// function updateLayout() {
+//   // update CSS grid based on number of diplayed videos
+//   var rowHeight = "98vh";
+//   var colWidth = "98vw";
+
+//   var numVideos = Object.keys(peerConnections).length + 1; // add one to include local video
+
+//   if (numVideos > 1 && numVideos <= 4) {
+//     // 2x2 grid
+//     rowHeight = "48vh";
+//     colWidth = "48vw";
+//   } else if (numVideos > 4) {
+//     // 3x3 grid
+//     rowHeight = "32vh";
+//     colWidth = "32vw";
+//   }
+
+//   document.documentElement.style.setProperty(`--rowHeight`, rowHeight);
+//   document.documentElement.style.setProperty(`--colWidth`, colWidth);
+// }
 
 function makeLabel(label) {
   var vidLabel = document.createElement("div");
