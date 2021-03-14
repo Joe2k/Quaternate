@@ -162,14 +162,25 @@ io.on("connection", (socket) => {
   console.log("New user connected");
 
   for (var i in line_history) {
-    socket.emit("draw_line", { line: line_history[i] });
+    socket.emit("draw_line", line_history[i]);
   }
 
   socket.on("draw_line", function (data) {
     // add received line to history
-    line_history.push(data.line);
+    line_history.push(data);
+    console.log(data);
     // send line to all clients
-    io.emit("draw_line", { line: data.line });
+    io.emit("draw_line", data);
+  });
+
+  socket.on("delete-jam", function (data) {
+    // add received line to history
+    console.log(data);
+    line_history = line_history.filter((line) => {
+      return line.roomId != data.roomId;
+    });
+    // send line to all clients
+    io.emit("delete-jam", data);
   });
 
   //   socket.username = "Anonymous";

@@ -277,6 +277,7 @@ function openJam() {
   document.getElementById("drawing").style.display = "block";
   document.getElementById("openJamButton").style.display = "none";
   document.getElementById("closeJamButton").style.display = "inline";
+  document.getElementById("deleteJam").style.display = "inline";
 }
 function closeJam() {
   document.getElementById("drawing").style.display = "none";
