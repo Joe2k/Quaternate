@@ -21,10 +21,9 @@ video {
   left: 0;
   bottom: 0;
   height: auto;
-  width: 100%;
+  width: 95%;
+  margin: 2.5%;
   border-radius: 30px;
-
-  margin: 5px;
 }
 
 .videoLabel {

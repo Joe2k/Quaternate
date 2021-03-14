@@ -1,5 +1,14 @@
+var scrolled = false;
+
+function updateScroll() {
+  if (!scrolled) {
+    var element = document.getElementById("scrollDiv");
+    element.scrollTop = element.scrollHeight;
+  }
+}
+
 (function connect() {
-  let socket = io.connect("http://localhost:4000");
+  let socket = io.connect("/");
 
   let username = document.querySelector("#username");
   let usernameBtn = document.querySelector("#usernameBtn");
@@ -8,6 +17,10 @@
   let messageBtn = document.querySelector("#messageBtn");
   let messageList = document.querySelector("#message-list");
   let roomId = $("#roomId").value;
+
+  $("#scrollDiv").on("scroll", function () {
+    scrolled = true;
+  });
 
   messageBtn.addEventListener("click", (e) => {
     let roomId = $("#roomId")[0].value;
@@ -31,6 +44,7 @@
       listItem.classList.add("list-group-item");
       messageList.appendChild(listItem);
     }
+    updateScroll();
     //console.log(data.data.userName);
   });
 
@@ -47,6 +61,7 @@
     let roomId = $("#roomId")[0].value;
     if (roomId === data.roomId) {
       info.textContent = data.userName + " is typing...";
+      updateScroll();
       setTimeout(() => {
         info.textContent = "";
       }, 5000);
@@ -67,10 +82,11 @@
         // let li = document.createElement("li");
         let messages = document.getElementById("message-list");
         let span = document.createElement("span");
-        messages.appendChild(span).append(data.sender.name + ": : " + data.message);
+        messages
+          .appendChild(span)
+          .append(data.sender.name + ": : " + data.message);
+        updateScroll();
         // messages.appendChild(li).append(data.message);
-
-        
       });
     });
 })();

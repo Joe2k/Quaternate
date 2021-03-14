@@ -62,7 +62,7 @@ function start() {
       .then(() => {
         console.log("ws://" + window.location.hostname + ":" + WS_PORT);
         serverConnection = new WebSocket(
-          "ws://" + window.location.hostname + ":" + 4050
+          "wss://" + "quaternate-wss.herokuapp.com"
         );
         serverConnection.onmessage = gotMessageFromServer;
         serverConnection.onopen = (event) => {
@@ -253,7 +253,7 @@ function checkPeerDisconnect(event, peerUuid) {
 
 function startCall() {
   document.getElementById("startCall").style.display = "none";
-  document.getElementById("videos").style.display = "block";
+  document.getElementById("videos").style.display = "flex";
   document.getElementById("footer1").style.display = "block";
   start();
 }
@@ -271,6 +271,18 @@ function stopConnection() {
   document.getElementById("videos").style.display = "none";
   document.getElementById("footer1").style.display = "none";
   localStream.getVideoTracks()[0].stop();
+}
+
+function openJam() {
+  document.getElementById("drawing").style.display = "block";
+  document.getElementById("openJamButton").style.display = "none";
+  document.getElementById("closeJamButton").style.display = "inline";
+  document.getElementById("deleteJam").style.display = "inline";
+}
+function closeJam() {
+  document.getElementById("drawing").style.display = "none";
+  document.getElementById("openJamButton").style.display = "inline";
+  document.getElementById("closeJamButton").style.display = "none";
 }
 
 // function updateLayout() {
