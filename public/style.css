@@ -43,10 +43,9 @@ video {
 .ourimage {
   margin-bottom: 25px;
   border: 5px solid #6ff1ca;
-  border-left-width: 15px; 
-  border-top-width: 10px ;
+  border-left-width: 15px;
+  border-top-width: 10px;
   border-radius: 15%;
-  
 }
 .footer1 {
   position: absolute;
@@ -62,10 +61,14 @@ video {
   border-radius: 50px;
 }
 .room {
-  margin-bottom: 25px;border: 5px solid #6ff1ca; border-left-width: 15px; border-top-width: 10px ;
+  margin-bottom: 25px;
+  border: 5px solid #6ff1ca;
+  border-left-width: 15px;
+  border-top-width: 10px;
 }
 .roomform {
-   border: 3px solid black; border-radius: 8px; 
+  border: 3px solid black;
+  border-radius: 8px;
 }
 #mic {
   margin-right: 10px;
@@ -88,4 +91,19 @@ video {
   margin-left: 10px;
   color: white;
   background-color: #ff1e56;
+}
+
+body {
+  animation: fadeInAnimation ease 2s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeInAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
