@@ -25,7 +25,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
 </head>
 <body style="background-color: black;">
-  <canvas id="drawing" style="width: 100%; height: 100vh; display: none;"></canvas>
+  <canvas id="drawing" style="width: 100%; height: 100vh; display: none;"> </canvas>
   <div style="height: 8vh; width: 100vw; text-align: center;background-color: #323232; border-radius: 0 0 20px 20px;">
 <h1 style="display:inline; margin: 0; font-size: 35px; color: #ff1e56;padding-top: 10px;font-family: 'Montserrat', sans-serif;">Cubicle - <%=room.roomName%></h1>
 <button type="button" id="deleteJam"
@@ -126,10 +126,10 @@
                 <ul class="list-group list-group-flush" id="message-list" style="margin-left: 30px;">
     
                 </ul>
-                <div class="info" style="background-color:transparent;"></div>
+                <div class="info" style="background-color: rgba(0, 0, 0, 0.6) !important; padding-left: 20px;"></div>
             </div>
             
-            <div class="card-footer " style="background-color: black;height: 10vh;">
+            <div class="card-footer " style="background-color: black;height: 10vh; border:0;">
                 <div class="input-group" style="background-color: transparent;">
                     <input type="text" class="form-control" id="message" placeholder="Send new message..." >
                     <div class="input-group-append" style="background-color:transparent;">
@@ -139,6 +139,10 @@
             </div>
         </div>
       </div>
+      <button type="button" class="btn btn-circle btn-sm" id="scrollBtn"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-down-circle-fill" viewBox="0 0 16 16">
+  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"/>
+</svg></button>
+      
   </div>
     <!-- <div class="container" style="">
     <div class="col-md-6" style="">

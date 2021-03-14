@@ -154,6 +154,11 @@ function gotMessageFromServer(message) {
     // initiate call if we are the newcomer peer
     setUpPeer(peerUuid, signal.displayName, true);
   } else if (signal.sdp) {
+    console.log(peerUuid, peerConnections[peerUuid].pc.signalingState);
+
+    // peerConnections[peerUuid].pc.onsignalingstatechange = (e) => {
+    //   console.log("yee now2");
+    // };
     peerConnections[peerUuid].pc
       .setRemoteDescription(new RTCSessionDescription(signal.sdp))
       .then(function () {
@@ -274,13 +279,17 @@ function stopConnection() {
 }
 
 function openJam() {
+  $("#drawing").fadeIn("slow");
+  $("#scrollBtn").fadeIn("slow");
   document.getElementById("drawing").style.display = "block";
   document.getElementById("openJamButton").style.display = "none";
   document.getElementById("closeJamButton").style.display = "inline";
   document.getElementById("deleteJam").style.display = "inline";
+  document.getElementById("scrollBtn").style.display = "inline";
 }
 function closeJam() {
-  document.getElementById("drawing").style.display = "none";
+  $("#drawing").fadeOut("slow");
+  $("#scrollBtn").fadeOut("slow");
   document.getElementById("openJamButton").style.display = "inline";
   document.getElementById("closeJamButton").style.display = "none";
   document.getElementById("deleteJam").style.display = "none";

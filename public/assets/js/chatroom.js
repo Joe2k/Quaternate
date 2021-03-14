@@ -12,7 +12,9 @@ $(document).ready(function () {
     if (e.keyCode == 13) $("#messageBtn").click();
   });
 });
-
+$("#scrollBtn").on("click", () => {
+  window.scrollTo(0, document.body.scrollHeight);
+});
 (function connect() {
   let socket = io.connect("/");
 
