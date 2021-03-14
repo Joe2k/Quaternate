@@ -7,6 +7,12 @@ function updateScroll() {
   }
 }
 
+$(document).ready(function () {
+  $("#message").keypress(function (e) {
+    if (e.keyCode == 13) $("#messageBtn").click();
+  });
+});
+
 (function connect() {
   let socket = io.connect("/");
 
@@ -18,9 +24,9 @@ function updateScroll() {
   let messageList = document.querySelector("#message-list");
   let roomId = $("#roomId").value;
 
-  $("#scrollDiv").on("scroll", function () {
-    scrolled = true;
-  });
+  // $("#scrollDiv").on("scroll", function () {
+  //   scrolled = true;
+  // });
 
   messageBtn.addEventListener("click", (e) => {
     let roomId = $("#roomId")[0].value;
@@ -40,9 +46,22 @@ function updateScroll() {
     let roomId = $("#roomId")[0].value;
     if (roomId === data.roomId) {
       let listItem = document.createElement("li");
-      listItem.textContent = data.userName + ": " + data.message;
+      let nameDiv = document.createElement("div");
+      let messageDiv = document.createElement("div");
+      let hrDiv = document.createElement("hr");
+      nameDiv.textContent = data.userName;
+      messageDiv.textContent = data.message;
+      nameDiv.classList.add("nameStyle");
+      messageDiv.classList.add("messageStyle");
+      hrDiv.classList.add("hrStyle");
+      // listItem.textContent = nameDiv + hrDiv + messageDiv;
+      listItem.appendChild(nameDiv);
+      listItem.appendChild(hrDiv);
+      listItem.appendChild(messageDiv);
       listItem.classList.add("list-group-item");
+      listItem.classList.add("li-list");
       messageList.appendChild(listItem);
+      updateScroll();
     }
     updateScroll();
     //console.log(data.data.userName);
@@ -80,12 +99,31 @@ function updateScroll() {
       json.map((data) => {
         console.log(data);
         // let li = document.createElement("li");
-        let messages = document.getElementById("message-list");
-        let span = document.createElement("span");
-        messages
-          .appendChild(span)
-          .append(data.sender.name + ": : " + data.message);
+        let messageList = document.querySelector("#message-list");
+        let listItem = document.createElement("li");
+        let nameDiv = document.createElement("div");
+        let messageDiv = document.createElement("div");
+        let hrDiv = document.createElement("hr");
+        nameDiv.textContent = data.sender.name;
+        messageDiv.textContent = data.message;
+        nameDiv.classList.add("nameStyle");
+        messageDiv.classList.add("messageStyle");
+        hrDiv.classList.add("hrStyle");
+        // listItem.textContent = nameDiv + hrDiv + messageDiv;
+        listItem.appendChild(nameDiv);
+        listItem.appendChild(hrDiv);
+        listItem.appendChild(messageDiv);
+        listItem.classList.add("list-group-item");
+        listItem.classList.add("li-list");
+        messageList.appendChild(listItem);
         updateScroll();
+
+        // let messages = document.getElementById("message-list");
+        // let span = document.createElement("span");
+        // messages
+        //   .appendChild(span)
+        //   .append(data.sender.name + ": : " + data.message);
+        // updateScroll();
         // messages.appendChild(li).append(data.message);
       });
     });
