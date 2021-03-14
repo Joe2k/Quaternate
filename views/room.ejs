@@ -12,6 +12,7 @@
       content="An interactive interconnected collection"
     />
     <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/style.css" />
   </head>
   <body style="background: url('/assets/img/roombg.jpg'); ; background-repeat: repeat-y;
   background-size: 100%; " >
@@ -32,10 +33,10 @@
            <button class="btn btn-primary" type="button" data-toggle="collapse" style='margin:16px; font-size: 25px; padding: 15px 30px;' data-target="#multiCollapseExample1" aria-expanded="false" aria-controls="multiCollapseExample1">Create A New Room</button>
           </p>
           <div class="collapse multi-collapse" id="multiCollapseExample1">
-            <div class="card card-body">
+            <div class="card card-body room">
               <form method="POST" action="/room/create">
-                <input name="roomName" placeholder="Type new room name" />
-                <input name="password" placeholder="Type new password" />
+                <input class="roomform" name="roomName" placeholder="Type new room name" />
+                <input class="roomform" name="password" placeholder="Type new password" />
                 <button type="submit" class="btn btn-primary">Create!!</button>
               </form>
             </div>
@@ -46,10 +47,10 @@
             <button class="btn btn-primary" type="button" data-toggle="collapse" style='margin:16px;font-size: 25px; padding: 15px 30px;' data-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">Join a Room</button>
           </p>
           <div class="collapse multi-collapse" id="multiCollapseExample2">
-            <div class="card card-body">
+            <div class="card card-body room">
               <form method="POST" action="/room/join">
-                <input name="roomName" placeholder="Type joining room name" />
-                <input name="password" placeholder="Type the password" />
+                <input class="roomform" name="roomName" placeholder="Type joining room name" />
+                <input class="roomform" name="password" placeholder="Type the password" />
                 <button type="submit" class="btn btn-primary">Join!</button>
               </form> 
             </div>
@@ -61,27 +62,20 @@
     </header>  
     <header
       class="d-flex masthead container"
-      style=""
     >
-      <!-- <div class="container text-center my-auto" style="padding: 15px30px">
-        <h1 class="mb-1" style="color: var(--white)">Your Rooms</h1>
-        
-        <div class="overlay"></>
-      </div> -->
 
-
-    <div class="container" style=""  >     
+    <div class="container"   >     
         
       
       <div class="row ">
         <%for(var i=0;i<user.rooms.length;i++){%>      
           <div class="col-md-6 col-sm-6 col-lg-4">
-            <div class="card" style="margin-bottom: 25px;border: 5px solid #6ff1ca; border-left-width: 15px; border-top-width: 10px ; border-radius: 10%;">
+            <div class="card room" style="border-radius: 50px;">
+              <% var url= "/assets/img/i"; url+=1+i%6; url+=".png" %>
+              <img class="card-img-top roomcard"  alt="Collab Image" src = "<%=url%>" height="200px" >
               <div class="card-body" style="text-align: center;">
-                <h5 class="card-title"><%=user.rooms[i].roomName%></h5>
-                <form action="/room/cubicle/<%=user.rooms[i]._id%>" method="GET"><button class="btn btn-primary" style='margin:16px' type="submit">Open room</button></form>
-                <form action="/chat/<%=user.rooms[i]._id%>" method="GET"><button class="btn btn-primary" style='margin:16px' type="submit">Open chat</button></form>
-                <form action="/duo/<%=user.rooms[i]._id%>" method="GET"><button class="btn btn-primary" style='margin:16px' type="submit">Open duo</button></form>
+                <h2 class="card-title"><%=user.rooms[i].roomName%></h2>
+                <form action="/duo/<%=user.rooms[i]._id%>" method="GET"><button class="btn btn-primary" style='margin:16px' type="submit">Open Room</button></form>
                 <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
               </div>
             </div>

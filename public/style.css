@@ -51,7 +51,15 @@ video {
   color: transparent;
   text-align: center;
 }
-
+.roomcard {
+  border-radius: 50px;
+}
+.room {
+  margin-bottom: 25px;border: 5px solid #6ff1ca; border-left-width: 15px; border-top-width: 10px ;
+}
+.roomform {
+   border: 3px solid black; border-radius: 8px; 
+}
 #mic {
   margin-right: 10px;
   color: white;
