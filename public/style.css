@@ -40,7 +40,13 @@ video {
   padding-left: 10px;
   padding-right: 10px;
 }
-
+.ourimage {
+  margin-bottom: 25px;
+  border: 5px solid #6ff1ca;
+  border-left-width: 15px; 
+  border-top-width: 10px ;
+  border-radius: 15%;
+}
 .footer1 {
   position: absolute;
   left: 0;
