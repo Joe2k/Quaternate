@@ -273,6 +273,17 @@ function stopConnection() {
   localStream.getVideoTracks()[0].stop();
 }
 
+function openJam() {
+  document.getElementById("drawing").style.display = "block";
+  document.getElementById("openJamButton").style.display = "none";
+  document.getElementById("closeJamButton").style.display = "inline";
+}
+function closeJam() {
+  document.getElementById("drawing").style.display = "none";
+  document.getElementById("openJamButton").style.display = "inline";
+  document.getElementById("closeJamButton").style.display = "none";
+}
+
 // function updateLayout() {
 //   // update CSS grid based on number of diplayed videos
 //   var rowHeight = "98vh";

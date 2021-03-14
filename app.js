@@ -156,9 +156,21 @@ const server = app.listen(PORT, function () {
 // httpServer.listen(4050, () => {
 //   console.log("listening on *:3000");
 // });
+var line_history = [];
 const io = socketio(server);
 io.on("connection", (socket) => {
   console.log("New user connected");
+
+  for (var i in line_history) {
+    socket.emit("draw_line", { line: line_history[i] });
+  }
+
+  socket.on("draw_line", function (data) {
+    // add received line to history
+    line_history.push(data.line);
+    // send line to all clients
+    io.emit("draw_line", { line: data.line });
+  });
 
   //   socket.username = "Anonymous";
 

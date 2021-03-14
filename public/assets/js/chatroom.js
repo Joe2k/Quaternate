@@ -8,7 +8,7 @@ function updateScroll() {
 }
 
 (function connect() {
-  let socket = io.connect("https://quaternate.herokuapp.com");
+  let socket = io.connect("/");
 
   let username = document.querySelector("#username");
   let usernameBtn = document.querySelector("#usernameBtn");
