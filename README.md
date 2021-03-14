@@ -4,12 +4,7 @@ A web app to buy and sell food items!
 
 ## :tada: Features
 
-- Live status updates
-- Live tracking of the delivery agent in the map
-- Dynamic cart functianality with the Total Price
-- Searching for food items and sellers
-- User Verification
-- Filters
+Quaternate is an app to support multidimensional collaborative environment among a group of people. People can simultaneously have a video/audio call while texting each other, and can also doodle and draw any images (A feature to create and edit documents simultaneously is also under construction). This app is specially beneficial when you want to discuss ideas, because currently one has to switch between many apps, while this all can be done in Quaternate's cubicles with only a scroll !!
 
 ## :hammer: Built With
 
