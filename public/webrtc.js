@@ -61,6 +61,9 @@ function start() {
       // set up websocket and message all existing clients
       .then(() => {
         console.log("ws://" + window.location.hostname + ":" + WS_PORT);
+        if (window.location.hostname === "localhost") {
+          serverConnection = new WebSocket("ws://" + "localhost:4050");
+        }
         serverConnection = new WebSocket(
           "wss://" + "quaternate-wss.herokuapp.com"
         );

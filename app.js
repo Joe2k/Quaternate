@@ -13,9 +13,6 @@ const HTTP_PORT = 8001; //default port for http is 80
 const fs = require("fs");
 const http = require("http");
 const https = require("https");
-// const WebSocket = require("ws");
-// // based on examples at https://www.npmjs.com/package/ws
-// const WebSocketServer = WebSocket.Server;
 
 const connectDB = require("./config/db");
 const authRoutes = require("./routes/auth");
@@ -24,7 +21,7 @@ const errorHandler = require("./controllers/error");
 
 // h
 const app = express();
-// const app2 = express();
+
 const chatRoutes = require("./routes/chat");
 
 app.use(bodyParser.json());
@@ -110,47 +107,56 @@ const server = app.listen(PORT, function () {
   console.log(`Server started on port ${PORT}`);
 });
 
-// function noop() {}
+if (process.env.PROD === "local") {
+  const WebSocket = require("ws");
+  // based on examples at https://www.npmjs.com/package/ws
+  const WebSocketServer = WebSocket.Server;
 
-// function heartbeat() {
-//   this.isAlive = true;
-// }
+  const app2 = express();
 
-// const server2 = app2.listen(4050, () => {
-//   console.log("wss running on 4050");
-// });
+  function noop() {}
 
-// const wss = new WebSocketServer({ server: server2 });
+  function heartbeat() {
+    this.isAlive = true;
+  }
+  let PORT = process.env.PORT || 4050;
 
-// wss.on("connection", function (ws) {
-//   ws.isAlive = true;
-//   ws.on("pong", heartbeat);
-//   ws.on("message", function (message) {
-//     // Broadcast any received message to all clients
-//     console.log("received: %s", message);
-//     wss.broadcast(message);
-//   });
+  const server2 = app2.listen(PORT, () => {
+    console.log(`wss running on ${PORT}`);
+  });
 
-//   ws.on("error", () => ws.terminate());
-// });
-// const interval = setInterval(function ping() {
-//   wss.clients.forEach(function each(ws) {
-//     if (ws.isAlive === false) return ws.terminate();
+  const wss = new WebSocketServer({ server: server2 });
 
-//     ws.isAlive = false;
-//     ws.ping(noop);
-//   });
-// }, 30000);
+  wss.on("connection", function (ws) {
+    ws.isAlive = true;
+    ws.on("pong", heartbeat);
+    ws.on("message", function (message) {
+      // Broadcast any received message to all clients
+      console.log("received: %s", message);
+      wss.broadcast(message);
+    });
 
-// wss.broadcast = function (data) {
-//   console.log(this.clients.size);
-//   this.clients.forEach(function (client) {
-//     console.log("hi");
-//     if (client.readyState === WebSocket.OPEN) {
-//       client.send(data);
-//     }
-//   });
-// };
+    ws.on("error", () => ws.terminate());
+  });
+  const interval = setInterval(function ping() {
+    wss.clients.forEach(function each(ws) {
+      if (ws.isAlive === false) return ws.terminate();
+
+      ws.isAlive = false;
+      ws.ping(noop);
+    });
+  }, 30000);
+
+  wss.broadcast = function (data) {
+    console.log(this.clients.size);
+    this.clients.forEach(function (client) {
+      console.log("hi");
+      if (client.readyState === WebSocket.OPEN) {
+        client.send(data);
+      }
+    });
+  };
+}
 
 // httpServer = http.createServer();
 // httpServer.listen(4050, () => {
