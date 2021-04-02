@@ -24,5 +24,10 @@
     "passport-local-mongoose": "^6.1.0",
     "socket.io": "^4.0.0",
     "ws": "^7.4.4"
+  },
+  "devDependencies": {
+    "eslint": "^7.23.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1"
   }
 }

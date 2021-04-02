@@ -55,13 +55,13 @@ passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-app.get("/home", function (req, res) {
+app.get("/home", (req, res) => {
   if (req.isAuthenticated()) {
     const newname = req.user.name;
     res.render("home", { newname: newname });
   } else res.render("home", { newname: "" });
 });
-app.get("/chat/:id", async function (req, res) {
+app.get("/chat/:id", async (req, res) => {
   if (req.isAuthenticated()) {
     const userName = req.user.name;
     const userId = req.user._id;
@@ -72,7 +72,7 @@ app.get("/chat/:id", async function (req, res) {
     res.redirect("/home");
   }
 });
-app.get("/duo/:id", async function (req, res) {
+app.get("/duo/:id", async (req, res) => {
   if (req.isAuthenticated()) {
     const userName = req.user.name;
     const userId = req.user._id;
@@ -85,7 +85,7 @@ app.get("/duo/:id", async function (req, res) {
   }
 });
 
-app.get("/cubicle", function (req, res) {
+app.get("/cubicle", (req, res) => {
   res.render("cubicle");
 });
 
@@ -94,7 +94,7 @@ app.use("/room", roomRoutes);
 
 app.get("/", (req, res) => res.redirect("/home"));
 
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
   let err = new Error("Not Found");
   err.status = 404;
   next(err);
@@ -103,7 +103,7 @@ app.use(function (req, res, next) {
 app.use(errorHandler);
 
 let PORT = process.env.PORT || 4000;
-const server = app.listen(PORT, function () {
+const server = app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
 });
 
@@ -127,10 +127,10 @@ if (process.env.PROD === "local") {
 
   const wss = new WebSocketServer({ server: server2 });
 
-  wss.on("connection", function (ws) {
+  wss.on("connection", (ws) => {
     ws.isAlive = true;
     ws.on("pong", heartbeat);
-    ws.on("message", function (message) {
+    ws.on("message", (message) => {
       // Broadcast any received message to all clients
       console.log("received: %s", message);
       wss.broadcast(message);
@@ -138,8 +138,8 @@ if (process.env.PROD === "local") {
 
     ws.on("error", () => ws.terminate());
   });
-  const interval = setInterval(function ping() {
-    wss.clients.forEach(function each(ws) {
+  const interval = setInterval(() => {
+    wss.clients.forEach((ws) => {
       if (ws.isAlive === false) return ws.terminate();
 
       ws.isAlive = false;
@@ -149,7 +149,7 @@ if (process.env.PROD === "local") {
 
   wss.broadcast = function (data) {
     console.log(this.clients.size);
-    this.clients.forEach(function (client) {
+    this.clients.forEach((client) => {
       console.log("hi");
       if (client.readyState === WebSocket.OPEN) {
         client.send(data);
@@ -171,7 +171,7 @@ io.on("connection", (socket) => {
     socket.emit("draw_line", line_history[i]);
   }
 
-  socket.on("draw_line", function (data) {
+  socket.on("draw_line", (data) => {
     // add received line to history
     line_history.push(data);
     console.log(data);
@@ -179,7 +179,7 @@ io.on("connection", (socket) => {
     io.emit("draw_line", data);
   });
 
-  socket.on("delete-jam", function (data) {
+  socket.on("delete-jam", (data) => {
     // add received line to history
     console.log(data);
     line_history = line_history.filter((line) => {
