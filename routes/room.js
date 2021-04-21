@@ -10,6 +10,6 @@ const {
 router.get("/hall", getRoomPage);
 router.post("/create", postCreateRoom);
 router.post("/join", postJoinRoom);
-router.get("/cubicle/:id", getCubicle);
+router.get("/:id", getCubicle);
 
 module.exports = router;

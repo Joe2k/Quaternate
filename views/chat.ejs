@@ -1,41 +1,29 @@
-<!DOCTYPE html>
-<head>
-    <title>Simple realtime chatroom</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
-</head>
-<body>
-    <div style="width: 40%; display: inline;">
-        <div class="title">
-            <h3><%=room.roomName%></h3>
+<div class="col-md-6" style="background-color: black;">
+
+      <div class="card" style="background-color: #ff1e56; color:#ffac41; font-weight: bold; font-size: larger; text-align: center; height: 7vh;">
+            <h3 class="card-header" style="font-family: 'Montserrat', sans-serif;">Chat Box</h3>
         </div>
-       
-        <div class="card" style="background-color: black; color:aquamarine; font-weight: bolder; font-size: larger;">
-            <h3 class="card-header"><%=userName%></h3>
-        </div>
-       
-        <div class="message-box" >   
-            <div class="card" style="background: url('/assets/img/doodle.jpg'); color: aliceblue; font-weight: bold; font-size: large;">
-                <ul class="list-group list-group-flush" id="message-list" style="margin-left: 30px;"></ul>
-                <div class="info" style="background-color:transparent;"></div>
+  
+        <div class="message-box " >   
+            <div id="scrollDiv" class="card overflow-auto" style="height: 75vh;background: url('/assets/img/chat.png'); background-size: cover; color: aliceblue; font-weight: bold; font-size: large;">
+                <ul class="list-group list-group-flush" id="message-list" style="margin-left: 30px;">
+    
+                </ul>
+                <div class="info" style="background-color: rgba(0, 0, 0, 0.6) !important; padding-left: 20px;"></div>
             </div>
             
-            <div class="card-footer " style="background-color: black;">
+            <div class="card-footer " style="background-color: black;height: 10vh; border:0;">
                 <div class="input-group" style="background-color: transparent;">
-                    <input type="text" class="form-control" id="message" placeholder="Send new message" >
+                    <input type="text" class="form-control" id="message" placeholder="Send new message..." >
                     <div class="input-group-append" style="background-color:transparent;">
-                        <button class="btn btn-success" type="button" id="messageBtn">Send</button>
+                        <button class="btn btn-success" type="button" id="messageBtn" style="background-color: #ff1e56; border:0; color: white;">Send</button>
                     </div>
                 </div>
             </div>
         </div>
-
-    </div>
-    <input id="userId" value="<%=userId%>" hidden/>
-    <input id="roomId" value="<%=roomId%>" hidden/>
-    <input id="userName" value="<%=userName%>" hidden/>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script> -->    
-    <script src="https://cdn.socket.io/3.1.1/socket.io.min.js" integrity="sha384-gDaozqUvc4HTgo8iZjwth73C6dDDeOJsAgpxBcMpZYztUfjHXpzrpdrHRdVp8ySO" crossorigin="anonymous"></script>
-    <script src="/assets/js/chatroom.js"></script>
-</body>
-</html>
+      </div>
+      <button type="button" class="btn btn-circle btn-sm" id="scrollBtn"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-down-circle-fill" viewBox="0 0 16 16">
+  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"/>
+</svg></button>
+      
+  </div>

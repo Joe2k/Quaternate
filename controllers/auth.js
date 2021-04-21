@@ -25,7 +25,7 @@ exports.postLogin = function (req, res, next) {
               console.log(err);
               res.redirect("/auth/login");
             } else {
-              res.redirect("/room/hall");
+              res.redirect("/cubicle/hall");
             }
           });
         }
@@ -69,7 +69,7 @@ exports.postRegister = function (req, res, next) {
         // res.redirect("/home");
       });
 
-      res.redirect("/room/hall");
+      res.redirect("/cubicle/hall");
     });
   } catch (err) {
     return next(err);

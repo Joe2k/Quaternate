@@ -10,7 +10,7 @@ exports.getRoomPage = function (req, res, next) {
       .exec(function (err, user) {
         if (err) return next(err);
         console.log(user);
-        res.render("room", { user });
+        res.render("hall", { user });
       });
   } else {
     res.redirect("/auth/login");
@@ -33,12 +33,12 @@ exports.postCreateRoom = async function (req, res, next) {
         $push: { rooms: room._id },
       });
       console.log(newuser);
-      res.redirect("/room/hall");
+      res.redirect("/cubicle/hall");
     } catch (e) {
       return next(e);
     }
   } else {
-    return res.redirect("/room/hall");
+    return res.redirect("/cubicle/hall");
   }
 };
 
@@ -57,38 +57,27 @@ exports.postJoinRoom = async function (req, res, next) {
         const newuser = await User.findByIdAndUpdate(req.user._id, {
           $push: { rooms: room._id },
         });
-        return res.redirect("/room/hall");
+        return res.redirect("/cubicle/hall");
       } else {
-        return res.redirect("/room/hall");
+        return res.redirect("/cubicle/hall");
       }
     } catch (e) {
       return next(e);
     }
   } else {
-    return res.redirect("/room/hall");
+    return res.redirect("/cubicle/hall");
   }
 };
 
 exports.getCubicle = async function (req, res, next) {
   if (req.isAuthenticated()) {
-    try {
-      function checkIfThere(id) {
-        return String(id.valueOf()) == String(req.user._id.valueOf());
-      }
-      const room = await Room.findById(req.params.id);
-      //console.log(room.members);
-      const result = room.members.find(checkIfThere);
-      //console.log(result);
-      if (result === undefined) {
-        return res.redirect("/room/hall");
-      } else {
-        const user = await User.findById(req.user._id);
-        return res.render("cubicle", { room, user });
-      }
-    } catch (e) {
-      return next(e);
-    }
+    const userName = req.user.name;
+    const userId = req.user._id;
+    const roomId = req.params.id;
+    const room = await Room.findById(roomId);
+    const user = await User.findById(req.user._id);
+    res.render("cubicle", { userName, roomId, room, userId, user });
   } else {
-    return res.redirect("/room/hall");
+    res.redirect("/home");
   }
 };

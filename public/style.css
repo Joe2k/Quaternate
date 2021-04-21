@@ -1,6 +1,9 @@
 body {
   background: black;
 }
+html {
+  scroll-behavior: smooth;
+}
 
 .videos {
   display: grid;
@@ -36,6 +39,21 @@ video {
   position: absolute;
   left: 0;
   bottom: 0;
+  padding: 1px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.videoBtn {
+  color: white;
+  font: bold 22px Arial, Sans-Serif;
+  height: 30px;
+
+  background: rgba(0, 0, 0, 0.55);
+
+  position: absolute;
+  right: 10px;
+  bottom: 20px;
   padding: 1px;
   padding-left: 10px;
   padding-right: 10px;
@@ -93,6 +111,14 @@ video {
   background-color: #ff1e56;
 }
 
+/* #localVideoContainer {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  left: 0;
+  bottom: 0;
+  z-index: 100;
+} */
 body {
   animation: fadeInAnimation ease 2s;
   animation-iteration-count: 1;
@@ -106,4 +132,8 @@ body {
   100% {
     opacity: 1;
   }
+}
+
+#drawing {
+  cursor: url("https://findicons.com/files/icons/977/rrze/48/pen.png"), auto;
 }

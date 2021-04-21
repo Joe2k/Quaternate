@@ -26,9 +26,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
   canvas.onmousemove = function (e) {
     // normalize mouse position to range 0.0 - 1.0
-    mouse.pos.x = e.clientX / width;
-    mouse.pos.y = e.clientY / height;
+    mouse.pos.x = e.clientX / width + 0.011;
+    mouse.pos.y = e.clientY / height + 0.05;
     mouse.move = true;
+    context.beginPath();
+    context.moveTo(mouse.pos.x, mouse.pos.y);
+    context.lineTo(mouse.pos.x, mouse.pos.y);
+    context.lineWidth = 5;
+    context.stroke();
   };
 
   // draw line received from server
@@ -39,6 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
       context.beginPath();
       context.moveTo(line[0].x * width, line[0].y * height);
       context.lineTo(line[1].x * width, line[1].y * height);
+      context.lineWidth = 5;
       context.stroke();
     }
   });
