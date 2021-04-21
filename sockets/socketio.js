@@ -1,4 +1,4 @@
-module.exports = function (server) {
+module.exports = function (server, Chat) {
   const socketio = require("socket.io");
 
   var line_history = [];

@@ -71,4 +71,4 @@ const server = app.listen(PORT, () => {
 });
 
 require("./sockets/wss");
-require("./sockets/socketio")(server);
+require("./sockets/socketio")(server, Chat);
