@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<head>
+    <title>Quaternate</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/assets/canvas.css" />
+    <link rel="stylesheet" href="/assets/css/chat.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+    <script src="/webrtc.js"></script>
+    <script src="/assets/js/canvas.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="icon" type="image/png" href="/assets/img/pencil.png" />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+</head>
+<body style="background-color: black;">
+  <canvas id="drawing" style="width: 100%; height: 100vh; display: none;"> </canvas>
+  <div style="height: 8vh; width: 100vw; text-align: center;background-color: #323232; border-radius: 0 0 20px 20px;">
+<h1 style="display:inline; margin: 0; font-size: 35px; color: #ff1e56;padding-top: 10px;font-family: 'Montserrat', sans-serif;">Cubicle - <%=room.roomName%></h1>
+<button type="button" id="deleteJam"
+        class="btn" style="display: none;position: absolute; left:65%; top: 5px; background-color: #ff1e56;" "><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+  <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+</svg></button>
+
+<button type="button" id="openJamButton"
+        class="btn" style="position: absolute; left:70%; top: 5px; background-color: #ffac41;" onclick="openJam()">Open Doodle</button>
+        <button type="button" id="closeJamButton"
+        class="btn" style="display: none; position: absolute; left:70%; top: 5px; background-color: #ffac41;" onclick="closeJam()">Close Doodle</button>
+<form action="/cubicle/hall" method="GET"><button type="submit" 
+        class="btn" style="position: absolute; left:85%; top: 5px; background-color: #ff1e56;">Leave Cubicle</button></form>
+
+  </div>
+  <div class="row" style="height: 80vh; width: 100vw; margin: 0">
+  <%- include('./video'); %>
+    <%- include('./chat'); %></div>
+  
+    
+
+    <input id="userId" value="<%=userId%>" hidden/>
+    <input id="roomId" value="<%=roomId%>" hidden/>
+    <input id="userName" value="<%=userName%>" hidden/>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script> -->    
+    <script src="https://cdn.socket.io/3.1.1/socket.io.min.js" integrity="sha384-gDaozqUvc4HTgo8iZjwth73C6dDDeOJsAgpxBcMpZYztUfjHXpzrpdrHRdVp8ySO" crossorigin="anonymous"></script>
+    <script src="/assets/js/chatroom.js"></script>
+    <input id="roomName" value="<%=room.roomName%>" hidden />
+    <input id="roomId" value="<%=room._id%>" hidden />
+    <input id="userId" value="<%=user._id%>" hidden />
+    <input id="userName" value="<%=user.name%>" hidden />
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+      crossorigin="anonymous"
+    ></script>
+    <!-- <script type="text/javascript">
+      start();
+    </script> -->
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+    />
+    <title>Quaternate</title>
+    <meta
+      name="description"
+      content="An interactive interconnected collection"
+    />
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="icon" type="image/png" href="/assets/img/pencil.png" />
+  </head>
+  <body style="background: white;
+  background-size: 100%; margin:0;" >
+
+    <header
+    class="d-flex masthead"
+    style="background: url('/assets/img/desk.jpg'); background-size: cover; background-position-x: center; background-repeat: no-repeat;"
+    >
+    <div class="container text-center my-auto" style="padding: 15px30px">
+      <h1 class="mb-1" style="color: var(--black); ">CUBICLES</h1>
+      <h3 class="mb-5" style="color: var(--grey)">
+        Create and Join New Cubicles Here &nbsp;
+      </h3>
+     
+      <div class="row" style="margin-bottom: 20px;">
+        <div class="col-md-6">
+          <p>
+           <button class="btn btn-primary" type="button" data-toggle="collapse" style='margin:16px; font-size: 25px; padding: 15px 30px;' data-target="#multiCollapseExample1" aria-expanded="false" aria-controls="multiCollapseExample1">Create A New Cubicle</button>
+          </p>
+          <div class="collapse multi-collapse" id="multiCollapseExample1">
+            <div class="card card-body room" style="border: 0; background-color: transparent;">
+              <form method="POST" action="/cubicle/create">
+                <div class="form-group mx-sm-3 mb-2"><input minlength="6" class="form-control" name="roomName" placeholder="Type new room name" /></div>
+                <div class="form-group mx-sm-3 mb-2"> <input minlength="6" type="password" class="form-control" name="password" placeholder="Type new password" /></div>
+
+               
+                <button type="submit" class="btn btn-primary">Create!!</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <p>
+            <button class="btn btn-primary" type="button" data-toggle="collapse" style='margin:16px;font-size: 25px; padding: 15px 30px;' data-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">Join a Cubicle</button>
+          </p>
+          <div class="collapse multi-collapse" id="multiCollapseExample2">
+            <div class="card card-body room" style="border: 0; background-color: transparent;">
+              <form method="POST" action="/cubicle/join">
+                <div class="form-group mx-sm-3 mb-2"><input minlength="6" class="form-control" name="roomName" placeholder="Type joining room name" /></div>
+                
+                <div class="form-group mx-sm-3 mb-2"><input minlength="6" type="password" class="form-control" name="password" placeholder="Type the password" /></div>
+                
+                <button type="submit" class="btn btn-primary">Join!</button>
+              </form> 
+            </div>
+          </div>
+        </div>
+      </div>   
+      <div style="margin-top: 150px;">
+        <h2>Scroll Down to See your Cubicles</h2>
+      </div>
+      <button style="height: 0px; width: 0px;padding: 0px; border: 0px;" type="button" class="btn btn-circle" id="scrollBtn"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-arrow-down-circle-fill" viewBox="0 0 16 16">
+  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"/>
+</svg></button>
+    </div>
+    
+    </header>  
+    <header
+      class="d-flex masthead container"
+    >
+
+    <div class="container"   >     
+        
+      
+      <div class="row ">
+        <%for(var i=0;i<user.rooms.length;i++){%>      
+          <div class="col-md-6 col-sm-6 col-lg-4">
+            <div class="card room" style="border-radius: 50px;">
+              <% var url= "/assets/img/i"; url+=1+i%6; url+=".png" %>
+              <img class="card-img-top roomcard"  alt="Collab Image" src = "<%=url%>" height="200px" >
+              <div class="card-body" style="text-align: center;">
+                <h2 class="card-title"><%=user.rooms[i].roomName%></h2>
+                <form action="/cubicle/<%=user.rooms[i]._id%>" method="GET"><button class="btn btn-primary" style='margin:16px' type="submit">Open Cubicle</button></form>
+                <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+              </div>
+            </div>
+          </div>              
+        
+        <%}%>
+      </div>
+    </div>
+  </header>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <script src="/assets/js/chatroom.js"></script>
+    </script>
+  </body>
+</html>

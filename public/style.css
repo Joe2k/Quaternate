@@ -1,0 +1,139 @@
+body {
+  background: black;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+.videos {
+  display: grid;
+  grid-gap: 5px;
+  grid-auto-flow: row;
+  padding-bottom: 0px;
+
+  grid-template-columns: repeat(auto-fit, minmax(50vw, 1fr));
+}
+
+.videoContainer {
+  background-color: black;
+  height: 40vh;
+}
+
+video {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: auto;
+  width: 95%;
+  margin: 2.5%;
+  border-radius: 30px;
+}
+
+.videoLabel {
+  color: white;
+  font: bold 22px Arial, Sans-Serif;
+  height: 30px;
+
+  background: rgba(0, 0, 0, 0.55);
+
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  padding: 1px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.videoBtn {
+  color: white;
+  font: bold 22px Arial, Sans-Serif;
+  height: 30px;
+
+  background: rgba(0, 0, 0, 0.55);
+
+  position: absolute;
+  right: 10px;
+  bottom: 20px;
+  padding: 1px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.ourimage {
+  margin-bottom: 25px;
+  border: 5px solid #6ff1ca;
+  border-left-width: 15px;
+  border-top-width: 10px;
+  border-radius: 15%;
+}
+.footer1 {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  padding-bottom: 20px;
+  width: 100%;
+  background-color: transparent;
+  color: transparent;
+  text-align: center;
+}
+.roomcard {
+  border-radius: 50px;
+}
+.room {
+  margin-bottom: 25px;
+  border: 5px solid #6ff1ca;
+  border-left-width: 15px;
+  border-top-width: 10px;
+}
+.roomform {
+  border: 3px solid black;
+  border-radius: 8px;
+}
+#mic {
+  margin-right: 10px;
+  color: white;
+  background-color: rgb(0, 0, 0);
+}
+#video {
+  margin-left: 10px;
+  color: white;
+  background-color: rgb(0, 0, 0);
+}
+
+#stopCall {
+  margin-left: 10px;
+  color: white;
+  background-color: #ff1e56;
+}
+
+#startCall {
+  margin-left: 10px;
+  color: white;
+  background-color: #ff1e56;
+}
+
+/* #localVideoContainer {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  left: 0;
+  bottom: 0;
+  z-index: 100;
+} */
+body {
+  animation: fadeInAnimation ease 2s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeInAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+#drawing {
+  cursor: url("https://findicons.com/files/icons/977/rrze/48/pen.png"), auto;
+}
