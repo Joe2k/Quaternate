@@ -70,5 +70,5 @@ const server = app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
 });
 
-require("./config/wss");
-require("./config/socketio")(server);
+require("./sockets/wss");
+require("./sockets/socketio")(server);
